@@ -1,0 +1,214 @@
+@startuml
+
+title __IMAGEPRO's Class Diagram__\n
+
+  namespace com.example.imagepro {
+    class com.example.imagepro.CombinarLetras {
+        {static} + fecha : String
+        {static} + id : String
+        {static} - TAG : String
+        - add_button : Button
+        - change_text : TextView
+        - clear_button : Button
+        - fin_button : Button
+        - space_button : Button
+        + CombinarLetras()
+        + onCameraFrame()
+        + onCameraViewStarted()
+        + onCameraViewStopped()
+        + onDestroy()
+        # onCreate()
+        # onPause()
+        # onResume()
+    }
+  }
+  
+
+  namespace com.example.imagepro {
+    class com.example.imagepro.MainActivity {
+        {static} + id : String
+        {static} + nombres : String
+        ~ cajaBienvenido : TextView
+        - combinar_letras : Button
+        - historial : Button
+        - texto_button : Button
+        # onCreate()
+    }
+  }
+  
+
+  namespace com.example.imagepro {
+    class com.example.imagepro.Texto {
+        {static} + fecha : String
+        {static} + id : String
+        ~ edtTexto : EditText
+        ~ edtTraducir : Button
+        ~ i : int
+        ~ palabra : String
+        ~ traducir : String
+        ~ videoView : VideoView
+        ~ webView : WebView
+        # onCreate()
+        - guardarHistorial()
+        - videos()
+    }
+  }
+  
+
+  namespace com.example.imagepro {
+    class com.example.imagepro.historial {
+        {static} + idU : String
+        ~ adapterST : ArrayAdapter<String>
+        ~ adapterTS : ArrayAdapter<String>
+        ~ historialST : ListView
+        ~ historialTS : ListView
+        # onCreate()
+    }
+  }
+  
+
+  namespace com.example.imagepro {
+    class com.example.imagepro.historial.ConnectionST {
+        ~ id : int
+        ~ ids : String
+        # doInBackground()
+        # onPostExecute()
+    }
+  }
+  
+
+  namespace com.example.imagepro {
+    class com.example.imagepro.historial.ConnectionTS {
+        ~ id : int
+        ~ ids : String
+        # doInBackground()
+        # onPostExecute()
+    }
+  }
+  
+
+  namespace com.example.imagepro {
+    class com.example.imagepro.historialGS {
+        - fecha : String
+        - texto : String
+        + getFecha()
+        + getTexto()
+        + setFecha()
+        + setTexto()
+    }
+  }
+  
+
+  namespace com.example.imagepro {
+    class com.example.imagepro.login {
+        ~ btnLogin : Button
+        ~ btnRegistrar : Button
+        ~ correo : String
+        ~ edtCorreo : EditText
+        ~ edtPassword : EditText
+        ~ jrq : JsonRequest
+        ~ password : String
+        ~ rq : RequestQueue
+        + onErrorResponse()
+        + onResponse()
+        # onCreate()
+        - guardarPreferencias()
+        - iniciarSesion()
+        - recuperarPreferencias()
+        - validarUsuario()
+    }
+  }
+  
+
+  namespace com.example.imagepro {
+    class com.example.imagepro.registrar {
+        ~ btnRegistrar : Button
+        ~ correo : String
+        ~ edtrCorreo : EditText
+        ~ edtrPassword : EditText
+        ~ edtrPassword2 : EditText
+        ~ edtrUsuario : EditText
+        ~ pass : String
+        ~ pass2 : String
+        ~ usuario : String
+        # onCreate()
+        - registrar()
+        - validarCorreo()
+        - validarCorreoForma()
+    }
+  }
+  
+
+  namespace com.example.imagepro {
+    class com.example.imagepro.signLanguageClass {
+        - Classification_Input_Size : int
+        - IMAGE_MEAN : int
+        - IMAGE_STD : float
+        - INPUT_SIZE : int
+        - PIXEL_SIZE : int
+        - current_text : String
+        - date : String
+        - espacio : String
+        - final_text : String
+        - gpuDelegate : GpuDelegate
+        - height : int
+        - id2 : int
+        - interpreter : Interpreter
+        - interpreter2 : Interpreter
+        - labelList : List<String>
+        - width : int
+        + recognizeImage()
+        ~ signLanguageClass()
+        - convertBitmapToByteBuffer()
+        - convertBitmapToByteBuffer1()
+        - get_alphabets()
+        - guardarHistorial()
+        - loadLabelList()
+        - loadModelFile()
+    }
+  }
+  
+
+  namespace com.example.imagepro {
+    class com.example.imagepro.usuario {
+        - correo : String
+        - id : String
+        - usuario : String
+        + getCorreo()
+        + getId()
+        + getUsuario()
+        + setCorreo()
+        + setId()
+        + setUsuario()
+    }
+  }
+  
+
+  com.example.imagepro.CombinarLetras .up.|> org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2
+  com.example.imagepro.CombinarLetras -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.imagepro.CombinarLetras o-- org.opencv.core.Mat : mGray
+  com.example.imagepro.CombinarLetras o-- org.opencv.android.BaseLoaderCallback : mLoaderCallback
+  com.example.imagepro.CombinarLetras o-- org.opencv.android.CameraBridgeViewBase : mOpenCvCameraView
+  com.example.imagepro.CombinarLetras o-- org.opencv.core.Mat : mRgba
+  com.example.imagepro.CombinarLetras o-- com.example.imagepro.signLanguageClass : signLanguageClass
+  com.example.imagepro.MainActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.imagepro.Texto -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.imagepro.historial -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.imagepro.historial +-down- com.example.imagepro.historial.ConnectionST
+  com.example.imagepro.historial +-down- com.example.imagepro.historial.ConnectionTS
+  com.example.imagepro.historial.ConnectionST -up-|> android.os.AsyncTask
+  com.example.imagepro.historial.ConnectionTS -up-|> android.os.AsyncTask
+  com.example.imagepro.login .up.|> com.android.volley.Response.ErrorListener
+  com.example.imagepro.login .up.|> com.android.volley.Response.Listener
+  com.example.imagepro.login -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.imagepro.registrar -up-|> androidx.appcompat.app.AppCompatActivity
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml
